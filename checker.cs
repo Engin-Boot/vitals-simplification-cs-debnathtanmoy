@@ -1,33 +1,37 @@
 using System;
 using System.Diagnostics;
-
+using System.IO;
 class Checker
 {
     static bool vitalsAreOk(float bpm, float spo2, float respRate) {
-        if(bpm < 70 || bpm > 150) {
-            return false;
-        } else if(spo2 < 90) {
-            return false;
-        } else if(respRate < 30 || respRate > 95) {
-            return false;
+        var flag1 = bpm_check(bpm);
+        var flag2 = spo_check(spo2);
+        var flag3 = resp_rate_check(respRate);
+        if (flag1 == flag2 ==flag3 == true)
+        {
+            return true;
         }
-        return true;
+        return false;
     }
-    static void ExpectTrue(bool expression) {
-        if(!expression) {
-            Console.WriteLine("Expected true, but got false");
-            Environment.Exit(1);
-        }
+
+    static bool bpm_check(float bpm)
+    {
+        return !(bpm < 70 || bpm > 150);
     }
-    static void ExpectFalse(bool expression) {
-        if(expression) {
-            Console.WriteLine("Expected false, but got true");
-            Environment.Exit(1);
-        }
+
+    static bool spo_check(float spo2)
+    {
+        return !(spo2 < 90);
     }
+
+    static bool resp_rate_check(float respRate)
+    {
+        return !(respRate < 30 || respRate > 95);
+    }
+
     static int Main() {
-        ExpectTrue(vitalsAreOk(100, 95, 60));
-        ExpectFalse(vitalsAreOk(40, 91, 92));
+        VitalChecker.ExpectTrue(vitalsAreOk(100, 95, 60));
+        VitalChecker.ExpectFalse(vitalsAreOk(40, 91, 92));
         Console.WriteLine("All ok");
         return 0;
     }
