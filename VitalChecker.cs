@@ -1,7 +1,8 @@
-using system;
+using System;
 using System.Diagnostics;
 
-class VitalChecker{
+class VitalChecker
+{
    public static bool vitalsAreOk(float bpm, float spo2, float respRate) {
         var flag1 = bpm_check(bpm);
         var flag2 = spo_check(spo2);
