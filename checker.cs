@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using System.IO;
 class Checker
 {
     static bool vitalsAreOk(float bpm, float spo2, float respRate) {
